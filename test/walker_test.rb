@@ -71,11 +71,22 @@ class WalkerTest < Minitest::Test
     @Jerimiah.add_client(@max)
     @Jerimiah.add_client(@oscar)
     @Jerimiah.add_client(@daisy)
+
     expected =
-      { "Shih-Tzu": [@sodie],
-        "Cocker Spaniel": [@max],
-        "Pug": [@oscar, @daisy]
+      { "Shih-Tzu" => [@sodie],
+        "Cocker Spaniel" => [@max],
+        "Pug" => [@oscar, @daisy]
       }
     assert_equal expected, @Jerimiah.clients_by_breed
+  end
+
+  def test_cant_add_same_client_twice
+    @Jerimiah.add_client(@sodie)
+    @Jerimiah.add_client(@max)
+    @Jerimiah.add_client(@max)
+    @Jerimiah.add_client(@oscar)
+    @Jerimiah.add_client(@daisy)
+    @Jerimiah.add_client(@daisy)
+    assert_equal [@sodie, @max, @oscar, @daisy], @Jerimiah.clients
   end
 end

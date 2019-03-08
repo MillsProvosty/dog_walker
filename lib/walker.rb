@@ -9,7 +9,7 @@ class Walker
   end
 
   def add_client(dogs)
-    @clients << dogs
+      @clients << dogs unless @clients.include?(dogs)
   end
 
   def walk_that_dog(dog_object)
@@ -55,14 +55,10 @@ class Walker
   end
 
   def clients_by_breed
-    breed_list = Hash.new(0)
-    breed_list_keys = []
-    breed_list_values = []
-    @clients.each do |client|
-      breed_list_keys = client.breed
+    @clients.group_by do |client|
+      client.breed
     end
-
-
   end
+
 
 end
